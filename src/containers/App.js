@@ -1,15 +1,22 @@
 import {Component} from 'react';
-import ContactDirectory from './ContactDirectory';
-import SearchBox from './SearchBox';
-import {avatars} from './avatars';
+import ContactDirectory from '../components/ContactDirectory';
+import SearchBox from '../components/SearchBox';
+import {avatars} from '../avatars';
+import Scroll from '../components/Scroll';
 
 class App extends Component{
   constructor(){
     super();
     this.state = {
-      avatars: avatars,
+      avatars: [],
       searchField: ''
     }
+  }
+
+  componentDidMount(){
+    // fetch("https://jsonplaceholder.typicode.com/users").
+    // then(response=>response.json()).then(users=>this.setState({avatars: users}));
+    this.setState({avatars: avatars});
   }
 
   onSearchChange = (event)=>{
@@ -26,7 +33,9 @@ class App extends Component{
        <h1> Doctors Directory </h1>
        <SearchBox searchChange = {this.onSearchChange}/>
        <div className='container bootstrap snippets bootdey'>
+        <Scroll>
          <ContactDirectory avatars={filteredNames}/>
+        </Scroll>
        </div>
      </div>
    );

@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import './Contact.css';
+import App from './containers/App';
 import reportWebVitals from './reportWebVitals';
 import 'tachyons';
 import "@fortawesome/fontawesome-free/css/all.min.css";
