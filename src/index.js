@@ -1,13 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import Card from './Contact';
+import './Contact.css';
 import reportWebVitals from './reportWebVitals';
+import 'tachyons';
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import "bootstrap-css-only/css/bootstrap.min.css";
+import "mdbreact/dist/css/mdb.css";
+import 'font-awesome/css/font-awesome.min.css';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <div className='container bootstrap snippets bootdey'>
+  <div className='row'>
+    <Card/>
+    <Card/>
+    <Card/>
+    </div>
+  </div>
+,
   document.getElementById('root')
 );
 
