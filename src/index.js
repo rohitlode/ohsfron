@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Card from './Contact';
+import App from './App';
 import './Contact.css';
 import reportWebVitals from './reportWebVitals';
 import 'tachyons';
@@ -10,12 +10,8 @@ import "mdbreact/dist/css/mdb.css";
 import 'font-awesome/css/font-awesome.min.css';
 
 ReactDOM.render(
-  <div className='container bootstrap snippets bootdey'>
-  <div className='row'>
-    <Card/>
-    <Card/>
-    <Card/>
-    </div>
+  <div>
+   <App />
   </div>
 ,
   document.getElementById('root')

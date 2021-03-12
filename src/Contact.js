@@ -1,8 +1,9 @@
 import React from 'react';
 import './Contact.css';
 import 'font-awesome/css/font-awesome.min.css';
-function Card(){
 
+
+function Contact(props){
   return (
     <div class="col-sm-4">
       <div class="box-info text-center user-profile-2">
@@ -11,9 +12,9 @@ function Card(){
         </div>
         <div class="user-profile-inner">
           <br></br>
-          <img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="rounded-circle profile-avatar" alt="User avatar"/>
-          <h5>Administrator</h5>
-
+          <img src={`https://bootdey.com/img/Content/avatar/avatar${props.id}.png`} class="rounded-circle profile-avatar" alt="User avatar"/>
+          <h5>{props.name}</h5>
+          <p>{props.email}</p>
           <div class="user-button">
             <div class="row">
               <div class="col-md-6">
@@ -31,4 +32,4 @@ function Card(){
 
 }
 
-export default Card;
+export default Contact;
