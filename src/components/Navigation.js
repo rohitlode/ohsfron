@@ -30,7 +30,7 @@ function Navigation(props){
       className="f6 fw4 hover-black no-underline black-70 dn dib-ns pv2 ph3"
       href="/"
       >
-      Pricing
+      Virtual Assistant
       </a>
       <a
       className="f6 fw4 hover-black no-underline black-70 dn dib-l pv2 ph3"
@@ -42,7 +42,7 @@ function Navigation(props){
       className="f6 fw4 hover-black no-underline black-70 dn dib-l pv2 ph3"
       href="/"
       >
-      Careers
+      Scheduler
       </a>
       <a
       className="f6 fw4 hover-black no-underline black-70 dib ml2 pv2 ph3 ba"
