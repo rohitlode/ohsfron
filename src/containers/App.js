@@ -8,7 +8,7 @@ import Navigation from '../components/Navigation';
 import Signup from '../components/Signup';
 import { Cards } from '../components/test';
 
-import { backwardChaining } from '../components/backwardChaining';
+//import { backwardChaining } from '../components/backwardChaining';
 
 class App extends Component{
   constructor(){
