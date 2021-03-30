@@ -29,7 +29,7 @@ function Contact(props){
       </div>
     </div>
   );
-
+ 
 }
 
 export default Contact;
