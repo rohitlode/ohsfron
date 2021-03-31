@@ -1,3 +1,4 @@
+//Import dependencies
 import {Component} from 'react';
 import ContactDirectory from '../components/ContactDirectory';
 import SearchBox from '../components/SearchBox';
@@ -8,7 +9,14 @@ import Navigation from '../components/Navigation';
 import Signup from '../components/Signup';
 import { Cards } from '../components/test';
 
-//import { backwardChaining } from '../components/backwardChaining';
+//Import Redux components
+
+//Import Chart components
+
+
+//Continue application to redux
+
+import { backwardChaining } from '../components/backwardChaining';
 
 class App extends Component{
   constructor(){
@@ -97,11 +105,6 @@ class App extends Component{
     abbr["TP"] = "Disease";
     abbr["ND"] = "NO_DISEASE";
 
-    const bc = new backwardChaining();
-    console.log(bc.calcClaus(13));
-    //let diagnosed = bc.startProcess(abbr);
-    let li= [];
-    for (var i=0; i<5; i++){ li.push(<h2> {i} </h2>); }
 
    return (
 
