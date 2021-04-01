@@ -1,5 +1,5 @@
 //Import dependencies
-import {Component} from 'react';
+import {Component, useEffect} from 'react';
 import ContactDirectory from '../components/ContactDirectory';
 import SearchBox from '../components/SearchBox';
 import SignIn from '../components/SignIn'
@@ -8,15 +8,26 @@ import Scroll from '../components/Scroll';
 import Navigation from '../components/Navigation';
 import Signup from '../components/Signup';
 import { Cards } from '../components/test';
-
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 //Import Redux components
+import {Provider} from "react-redux";
+import store from "../store";
 
 //Import Chart components
+import Chat from "../components/chat/Chat";
 
+//Import actiom
+import {createSession} from "../actions/assistant"
 
-//Continue application to redux
+//Import axios
+import axios from "axios";
 
-import { backwardChaining } from '../components/backwardChaining';
+if(localStorage.session){
+  delete axios.defaults.headers.common["session_id"];
+  axios.defaults.headers.common["session_id"] = localStorage.session;
+}else{
+  delete axios.defaults.headers.common["session_id"];
+}
 
 class App extends Component{
   constructor(){
@@ -27,13 +38,17 @@ class App extends Component{
       route:'signin' //Current page of app
     }
   }
-
   //After load
   componentDidMount(){
     // fetch("https://jsonplaceholder.typicode.com/users")
     // .then(response=>response.json())
     // .then(users=>this.setState({avatars: users}));
     this.setState({avatars: avatars});
+    if(!localStorage.session){
+      store.dispatch(createSession());
+    }else{
+
+    }
   }
 
 
@@ -52,6 +67,10 @@ class App extends Component{
       console.log("Registerrrrr");
       this.setState({route: 'signup'})
     }
+    else if(event.target.value == "assistant"){
+      console.log("Assistant");
+      this.setState({route: 'assistant'});
+    }
     else {
       this.setState({route: "Sign in"});
     }
@@ -63,51 +82,10 @@ class App extends Component{
     let filteredNames = this.state.avatars.filter(avatar => {
       return avatar.name.toLowerCase().includes(this.state.searchField.toLowerCase());
     });
-    var abbr={};
-    abbr["BC"] = "Behaviour_Change";
-    abbr["AX"] = "Anxious";
-    abbr["DI"] = "DISORDER";
-    abbr["DL"] = "Delusions";
-    abbr["EX"] = "Exasperate";
-    abbr["DP"] = "Depression";
-    abbr["SU"] = "Suicide";
-    abbr["PR"] = "Paranoia";
-    abbr["CC"] = "Concentration";
-    abbr["IN"] = "Insomnia";
-    abbr["AC"] = "Appetite_Changes";
-    abbr["FG"] = "Fatigue";
-    abbr["SD"] = "Selfdestruct";
-    abbr["DF"] = "Dyingfear";
-    abbr["SP"] = "Speech_Difficulty";
-    abbr["TL"] = "Talkative";
-    abbr["GD"] = "Grandiosity";
-    abbr["MD"] = "Manicdepression";
-    abbr["SX"] = "Sexdesire";
-    abbr["PA"] = "Panic_Attack";
-    abbr["AM"] = "Amnesia";
-    abbr["RT"] = "Repeatedlygoingoverthoughts";
-    abbr["RH"] = "Rapid_Heartbeat";
-    abbr["PP"] = "PALPITATION";
-    abbr["ADL"] =  "CLASS 1 DISORDER";
-    abbr["AD"] =  "CLASS 2 DISORDER";
-    abbr["ID"] =  "INITIAL_STAGE_DYSTHYMIA";
-    abbr["IC"] =  "CLASS 4 DISORDER";
-    abbr["CD"] =  "CLASS 3 DISORDER";
-    abbr["AF"] =  "CLASS 5 DISORDER";
-    abbr["IA"] =  "INITIAL_STAGE_PANICDISORDERAGROPHOBIA";
-    abbr["SU"] =  "SUICIDE";
-    abbr["IG"] =  "INITIAL_STAGE_GENERALIZED_ANXIETY_DISORDER";
-    abbr["IS"] =  "INITIAL_STAGE_SCHIZOAFECTIVE_DISORDER";
-    abbr["MD"] =  "MANICDEPRESSION";
-    abbr["GD"] =  "GRANDIOSITY";
-    abbr["IB"] =  "INITIAL_STAGE_BIPOLAR_DISORDER";
-    abbr["IM"] =  "INITIAL_STAGE_MDD";
-    abbr["TP"] = "Disease";
-    abbr["ND"] = "NO_DISEASE";
 
 
    return (
-
+     <Provider store={store}>
      <div className='tc'>
      {
        this.state.route === 'signin'
@@ -118,8 +96,13 @@ class App extends Component{
          </div>
        : this.state.route === 'signup'
        ? <Signup routeChange = {this.onRouteChange} />
+       : this.state.route === 'assistant'
+       ?<div>
+         <Navigation routeChange = {this.onRouteChange}/>
+       </div>
        :<div>
        <Navigation routeChange = {this.onRouteChange}/>
+       <Chat />
        <h1> Doctors Directory </h1>
        <SearchBox searchChange = {this.onSearchChange}/>
        <div className='container bootstrap snippets bootdey'>
@@ -130,6 +113,7 @@ class App extends Component{
        </div>
      }
      </div>
+     </Provider>
    );
  }
 }
