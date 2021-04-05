@@ -5,7 +5,7 @@ import reportWebVitals from './reportWebVitals';
 import 'tachyons';
 
 import "bootstrap-css-only/css/bootstrap.min.css";
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 ReactDOM.render(
   <BrowserRouter>
    <App />

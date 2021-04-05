@@ -1,20 +1,21 @@
 //Import dependencies
-import {Component, useEffect} from 'react';
-import ContactDirectory from '../components/ContactDirectory';
-import SearchBox from '../components/SearchBox';
+import {useEffect, useState} from 'react';
 import SignIn from '../components/SignIn'
-import {avatars} from '../avatars';
-import Scroll from '../components/Scroll';
 import Navigation from '../components/Navigation';
 import Signup from '../components/Signup';
-import { Cards } from '../components/test';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Home from '../components/Home';
+import About from "../components/About";
+import Scheduler from "../components/Scheduler";
+import Doctors from '../components/Doctors';
+import { Route, Switch } from 'react-router-dom';
+
+
 //Import Redux components
 import {Provider} from "react-redux";
 import store from "../store";
 
 //Import Chart components
-import Chat from "../components/chat/Chat";
+import Vasst from "../components/vasst/Vasst";
 
 //Import actiom
 import {createSession} from "../actions/assistant"
@@ -29,93 +30,66 @@ if(localStorage.session){
   delete axios.defaults.headers.common["session_id"];
 }
 
-class App extends Component{
-  constructor(){
-    super();
-    this.state = {
-      avatars: [],
-      searchField: '',
-      route:'signin' //Current page of app
-    }
-  }
-  //After load
-  componentDidMount(){
-    // fetch("https://jsonplaceholder.typicode.com/users")
-    // .then(response=>response.json())
-    // .then(users=>this.setState({avatars: users}));
-    this.setState({avatars: avatars});
-    if(!localStorage.session){
-      store.dispatch(createSession());
-    }else{
+function App() {
 
-    }
-  }
+  //States  
 
+  const [route, setRoute] = useState('signin');
 
-//Event function
-  onSearchChange = (event)=>{
-    this.setState({searchField: event.target.value});
-  }
 
   //Event function for SignIn
-  onRouteChange =  (event) =>{
-    console.log(event.target)
-    console.log(event.target.value);
-    if(event.target.value === "Sign in")
-      this.setState({route: 'kjk'});
-    else if(event.target.value == "register"){
-      console.log("Registerrrrr");
-      this.setState({route: 'signup'})
-    }
-    else if(event.target.value == "assistant"){
-      console.log("Assistant");
-      this.setState({route: 'assistant'});
-    }
-    else {
-      this.setState({route: "Sign in"});
-    }
+  const onRouteChange = (route) => {
+    console.log("Clicked ",route);
+    setRoute(route);
   }
 
+  //useEffect
+  useEffect(() => {
+    if(!localStorage.session){
+          store.dispatch(createSession());
+        }else{
+    
+        }
+  }, []);
+
   //render will be called everytime setState is called!
-  render(){
+  // render(){
 
-    let filteredNames = this.state.avatars.filter(avatar => {
-      return avatar.name.toLowerCase().includes(this.state.searchField.toLowerCase());
-    });
+  return (
+     <Provider store={ store }>
+       <div className='tc'>
+       <Navigation onRouteChange = {onRouteChange}/>
+       {
+         route === 'home'? <div>
+             {/* <Vasst /> */}
+             {/* <Doctors onSearchChange = {onSearchChange} filteredNames= {filteredNames} /> */}
+              <h1> HOME </h1>
+          </div>
+          : (
+            route === 'signin'?
+            <div>
+             <h1> One Health System </h1>
+             <SignIn onRouteChange = {onRouteChange} />
+            </div> :
+            ( route === 'doctors'?
+              <Doctors/>
+              : <Signup onRouteChange = {onRouteChange} />
+            )
 
-
-   return (
-     <Provider store={store}>
-     <div className='tc'>
-     {
-       this.state.route === 'signin'
-       ?
-       <div>
-        <h1> One Health System </h1>
-         <SignIn routeChange = {this.onRouteChange} />
-         </div>
-       : this.state.route === 'signup'
-       ? <Signup routeChange = {this.onRouteChange} />
-       : this.state.route === 'assistant'
-       ?<div>
-         <Navigation routeChange = {this.onRouteChange}/>
+              
+          )
+        }
        </div>
-       :<div>
-       <Navigation routeChange = {this.onRouteChange}/>
-       <Chat />
-       <h1> Doctors Directory </h1>
-       <SearchBox searchChange = {this.onSearchChange}/>
-       <div className='container bootstrap snippets bootdey'>
-        <Scroll>
-         <ContactDirectory avatars={filteredNames}/>
-        </Scroll>
-       </div>
-       </div>
-     }
-     </div>
+       <Route exact path="/" component={Home}/>
+       <Route exact path="/signin" component={SignIn}/>
+       <Route exact path="/doctors" component={Doctors}/>
+       <Route exact path="/Vasst" component = {Vasst}/>
+       <Route exact path="/About" component={About}/>
+       <Route exact path="/Scheduler" component={Scheduler}/>
      </Provider>
+  
    );
- }
+//  }
 }
 
 export default App;
