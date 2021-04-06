@@ -22,7 +22,7 @@ function Navigation({ onRouteChange }){
             </a>
           </div>
             <div className="dtc v-mid tr pa3">
-              <Link to="/Doctors"> <a className="f6 fw4 hover-black no-underline black-70 dn dib-ns pv2 ph3" href="/" onClick = {() => onRouteChange('doctors') }>
+              <Link to="/Doctors"> <a className="f6 fw4 hover-black no-underline black-70 dn dib-ns pv2 ph3" href="/" onClick = {() => onRouteChange('home') }>
                 Doctors
               </a></Link>
               <Link to="/Vasst"><a className="f6 fw4 hover-black no-underline black-70 dn dib-ns pv2 ph3" href="/" onClick = {() => onRouteChange('home') }>

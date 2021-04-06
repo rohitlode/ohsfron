@@ -8,7 +8,7 @@ import About from "../components/About";
 import Scheduler from "../components/Scheduler";
 import Doctors from '../components/Doctors';
 import { Route, Switch } from 'react-router-dom';
-
+import './main.css';
 
 //Import Redux components
 import {Provider} from "react-redux";
@@ -60,10 +60,9 @@ function App() {
        <div className='tc'>
        <Navigation onRouteChange = {onRouteChange}/>
        {
-         route === 'home'? <div>
-             {/* <Vasst /> */}
-             {/* <Doctors onSearchChange = {onSearchChange} filteredNames= {filteredNames} /> */}
-              <h1> HOME </h1>
+         route === 'home'? 
+         <div>
+              {/* <h1> HOME </h1> */}
           </div>
           : (
             route === 'signin'?
@@ -71,20 +70,23 @@ function App() {
              <h1> One Health System </h1>
              <SignIn onRouteChange = {onRouteChange} />
             </div> :
-            ( route === 'doctors'?
-              <Doctors/>
-              : <Signup onRouteChange = {onRouteChange} />
+            ( 
+              // route === 'doctors'?
+              // <Doctors/>
+              // :
+               <Signup onRouteChange = {onRouteChange} />
             )
 
               
           )
         }
        </div>
-       <Route exact path="/" component={Home}/>
+       <Route exact path="/home" component={Home}/>
        <Route exact path="/signin" component={SignIn}/>
        <Route exact path="/doctors" component={Doctors}/>
        <Route exact path="/Vasst" component = {Vasst}/>
        <Route exact path="/About" component={About}/>
+       <Route exact path="/Signup" component={Signup}/>
        <Route exact path="/Scheduler" component={Scheduler}/>
      </Provider>
   

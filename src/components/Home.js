@@ -1,6 +1,6 @@
 function Home() {
     
-return (<h1> HOME </h1>);
+return (<div className="tc"><h1> HOME </h1></div>);
 
 }
 
