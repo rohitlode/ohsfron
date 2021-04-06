@@ -1,5 +1,5 @@
-
-function SignIn({ onRouteChange }){
+import {Link} from 'react-router-dom';
+function SignIn({ onRouteChange, props }){
   return (
     <article className="br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow center">
       <main className="pa4 black-80">
@@ -45,21 +45,18 @@ function SignIn({ onRouteChange }){
           </label>
           </fieldset>
           <div className="">
-          <input
+            <Link className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit" to="/"> Sign In</Link>
+            {/* <p
             className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
             type="submit"
             value="Sign in"
-            onClick = {() => onRouteChange('home')}
-          />
+            // onClick = {() => onRouteChange('home')}
+            > <Link to="/home"></Link> Sign In</p> */}
+          
           </div>
           <div className="lh-copy mt3">
-          <p className="f6 link dim black db pointer" type="submit" onClick={ ()=>  onRouteChange('regiser') }> Register </p>
-          <a
-            href="#0"
-            className="f6 link db"
-          >
-          htmlForgot your password?
-          </a>
+            <Link className="f6 link dim black db pointer" to="/signup"> Register </Link>
+            <Link className="f6 link db"> Forgot Password? </Link>
           </div>
         </div>
       </main>

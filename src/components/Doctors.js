@@ -28,7 +28,7 @@ function Doctors() {
     }, []);
 
     return (
-        <div>
+        <div className = "tc">
             <h1> Doctors Directory </h1>
             <SearchBox searchChange = {onSearchChange}/>
             <div className='container bootstrap snippets bootdey'>
