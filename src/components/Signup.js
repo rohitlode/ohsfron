@@ -1,3 +1,4 @@
+import {Link} from 'react-router-dom';
 function Signup(){
   return (<article class="br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow center">
     <main className="pa4 black-80">
@@ -39,11 +40,10 @@ Password
 </div>
 </fieldset>
 <div className="">
-<input
+<Link
   className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
-  type="submit"
-  value="Register"
-/>
+  type="submit" to="/signin"
+> Register </Link>
 </div>
 </div>
 </main>
