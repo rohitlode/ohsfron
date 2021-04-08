@@ -22,7 +22,7 @@ const Vasst = ({ chat, userMessage, sendMessage }) =>{
   }
 
   return(
-    <div className = "chat">
+    <div className = "chat tc">
       <h1> Virtual Assistant </h1>
       <p> Type in symptoms to start </p>
         {/* Handle Messages */}
