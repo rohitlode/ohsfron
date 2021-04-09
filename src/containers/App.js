@@ -7,6 +7,7 @@ import Home from '../components/Home';
 import About from "../components/About";
 import Scheduler from "../components/Scheduler";
 import Doctors from '../components/Doctors';
+import Article from '../components/Article';
 import { Route, Switch } from 'react-router-dom';
 import './main.css';
 
@@ -69,6 +70,7 @@ function App() {
           <Route  path="/about" component= {About}/>
           <Route  path="/signup" component= {Signup}/>
           <Route  path="/scheduler" component= {Scheduler}/>
+          <Route  path="/articles" component= {Article}/>
        </Switch>
      </Provider>
   
