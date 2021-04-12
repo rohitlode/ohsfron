@@ -16,7 +16,7 @@ function SignIn({ onRouteChange, props }){
             className="db fw6 lh-copy f6"
             htmlFor="email-address"
           >
-          Email
+          E-mail
           </label>
           <input
             className="pa2 input-reset ba hover-bg-black hover-white w-100"
