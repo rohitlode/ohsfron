@@ -11,6 +11,7 @@ function ContactDirectory({avatars}){
           id={avatars[i].id}
           name={avatars[i].name}
           email={avatars[i].email}
+          profession={avatars[i].profession}
         />)
       }) }
     </div>
