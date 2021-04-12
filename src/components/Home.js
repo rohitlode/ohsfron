@@ -162,7 +162,7 @@ return (
                 </Carousel.Item>
                 <Carousel.Item  className="pa5 bg-white">
                     <Carousel.Caption className="pa1">
-                    <h3 className="black-80 fw2">TI get to learn a lot from this website!</h3>
+                    <h3 className="black-80 fw2">I get to learn a lot from this website!</h3>
                     <p className="black-80">Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
                     </Carousel.Caption>
                 </Carousel.Item>
@@ -174,6 +174,9 @@ return (
             <p className="fw1 tc white-90">Copyright © 2021, One Health System. All rights reserved.</p>
         </div>
 
+
+
+        
 </header>
 );
 

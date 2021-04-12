@@ -8,6 +8,7 @@ import About from "../components/About";
 import Scheduler from "../components/Scheduler";
 import Doctors from '../components/Doctors';
 import Article from '../components/Article';
+import Appointment from '../components/Appointment';
 import { Route, Switch } from 'react-router-dom';
 import './main.css';
 
@@ -71,6 +72,7 @@ function App() {
           <Route  path="/signup" component= {Signup}/>
           <Route  path="/scheduler" component= {Scheduler}/>
           <Route  path="/articles" component= {Article}/>
+          <Route  path="/appointments" component={Appointment} />
        </Switch>
      </Provider>
   
