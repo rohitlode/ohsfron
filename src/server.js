@@ -6,7 +6,8 @@ const app = express();
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_URI || `mongodb+srv://ohsfron_app:12345qwerty@cluster0.qhw2d.mongodb.net/myFirstDatabaseretryWrites=true&w=majority`);
+mongoose.connect(process.env.MONGODB_URI ||
+   `mongodb+srv://ohsfron_app:12345qwerty@cluster0.qhw2d.mongodb.net/myFirstDatabaseretryWrites=true&w=majority`);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
