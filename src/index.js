@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom';
 import App from './containers/App';
 import reportWebVitals from './reportWebVitals';
 import 'tachyons';
-
+import './index.css';
 import "bootstrap-css-only/css/bootstrap.min.css";
 import { BrowserRouter } from 'react-router-dom';
 ReactDOM.render(
   <BrowserRouter>
-   <App />
+   <App/>
   </BrowserRouter>
 ,
   document.getElementById('root')
