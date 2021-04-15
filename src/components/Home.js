@@ -84,17 +84,20 @@ return (
             <div className="col-sm-6">
                 <div className="row ma3">
                     <div className="col-6 col-sm-6">
+                        <Link to={{pathname:"https://www.pacificmedicalcenters.org/physician-articles/a-sniffle-a-sneeze-dimple-sahay"}} target="_blank" className="dim black" style={{textDecoration: 'none', color: 'inherit'}} >
                         <div className="card h-100">
                             <img src="https://www.pacificmedicalcenters.org/images/uploads/flu_and_cold_season.jpg" className="card-img-top" height="173" alt="Physician"/>
                             <div className="card-body">
                                 <h5 className="card-title">A sniffle, a sneeze</h5>
                                 <p className="card-text fw1">PacMed doctor explains the differences between the common cold and flu virus</p>
                                 <p className="fw1">Dimple Sahay, MD</p>
-                                <a href="https://www.pacificmedicalcenters.org/physician-articles/a-sniffle-a-sneeze-dimple-sahay"></a>
+                                
                             </div>
                         </div>
+                        </Link>
                     </div>
                     <div className="col-6 col-sm-6">
+                    <Link to={{pathname:"https://www.seattletimes.com/life/wellness/controlling-allergies-in-spring-and-early-summer/#:~:text=Avoid%20using%20fans%20that%20blow,pull%20in%20pollen%20from%20outside.&text=When%20driving%2C%20use%20your%20air,to%20filter%20larger%20sized%20allergens.&text=Use%20a%20dehumidifier%20to%20decrease%20mold%20growth%20in%20your%20home.&text=Shower%20frequently%20to%20remove%20pollen%20from%20your%20skin%20and%20hair."}} target="_blank" className="dim black" style={{textDecoration: 'none', color: 'inherit'}} >
                         <div className="card h-100">
                             <img src="https://www.pacificmedicalcenters.org/images/uploads/SpringAllergyArticle.jpg" className="card-img-top" height="173" alt="Physician"/>
                             <div className="card-body">
@@ -103,6 +106,7 @@ return (
                                 <p className="fw1">Alexander M. Hamling, MD, MBA, FAAP </p>
                             </div>
                         </div>
+                    </Link>
                     </div>
                 </div>
             </div>
@@ -168,13 +172,6 @@ return (
                 </Carousel.Item>
             </Carousel>
         </div>
-
-        <div className="bg-black-80  pa4">
-            <h2 className="fw1 tc white-90">One Health System </h2>
-            <p className="fw1 tc white-90">Copyright © 2021, One Health System. All rights reserved.</p>
-        </div>
-
-
 
         
 </header>

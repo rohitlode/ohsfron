@@ -4,10 +4,11 @@ import SignIn from '../components/SignIn'
 import Navigation from '../components/Navigation';
 import Signup from '../components/Signup';
 import Home from '../components/Home';
-import About from "../components/About";
+import Contact from "../components/ContactForm";
 import Scheduler from "../components/Scheduler";
 import Doctors from '../components/Doctors';
 import Article from '../components/Article';
+import Greeting from '../components/Greeting';
 import Appointment from '../components/Appointment';
 import { Route, Switch } from 'react-router-dom';
 import './main.css';
@@ -59,7 +60,7 @@ function App() {
 
   return (
      <Provider store={ store }>
-       <div className='tc' className="cover bg-left bg-center-l" >
+       <div className='tc'>
        <Navigation onRouteChange = {onRouteChange}/>
        </div>
 
@@ -68,12 +69,17 @@ function App() {
           <Route  path="/signin" component = {SignIn}/>
           <Route  exact path="/doctors" component = {Doctors}/>
           <Route  path="/virtualAssistant" component = {Vasst}/>
-          <Route  path="/about" component= {About}/>
+          <Route  path="/contact" component= {Contact}/>
           <Route  path="/signup" component= {Signup}/>
           <Route  path="/scheduler" component= {Scheduler}/>
           <Route  path="/articles" component= {Article}/>
           <Route  path="/appointments" component={Appointment} />
+          <Route  path="/greeting" component={Greeting} />
        </Switch>
+       <div className="bg-black-80  pa4">
+            <h2 className="fw1 tc white-90">One Health System </h2>
+            <p className="fw1 tc white-90">Copyright © 2021, One Health System. All rights reserved.</p>
+        </div>
      </Provider>
   
    );

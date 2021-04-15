@@ -6,7 +6,7 @@ import interactionPlugin from "@fullcalendar/interaction"; // needed for dayClic
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-
+import {Link} from 'react-router-dom'
 
 function Scheduler(props) {
 
@@ -39,7 +39,9 @@ function Scheduler(props) {
       }
       const renderSidebar = () => {
         return (
-          <div className='scheduler-sidebar'>
+          <div className="">
+           
+          <div className='scheduler-sidebar vh-100'>
             <div className='scheduler-sidebar-section'>
               {props.location.hasOwnProperty("aboutProps") && props.location.aboutProps.hasOwnProperty("name")?
               <div>
@@ -60,20 +62,12 @@ function Scheduler(props) {
                 {currentEvents.map(renderSidebarEvent)}
               </ul>
             </div>
-
-
-          {/* MODAL */}
-          {/* <Button variant="primary" onClick={() => setModalShow(true)}>
-            Launch vertically centered modal
-          </Button> */}
-
-          
-
-
-
+            {/* Back to results  */}
+            <Link className="pa3" to="/doctors">Go back to results</Link>
           </div>
-
-
+            {/* { console.log(prop.props.history.goBack())  } */}
+            
+          </div>
 
 
 
@@ -157,6 +151,7 @@ function Scheduler(props) {
       }
       
     return (
+      <div className="w-100 vh-100">
     <div className='scheduler'>
             {renderSidebar()}
         <div className="scheduler-main">         
@@ -167,11 +162,11 @@ function Scheduler(props) {
                 right: 'title'
               }}
             initialView='timeGridWeek'
-            disableDragging={true}
+            // disableDragging={true}
             selectable={true}
             selectAllow = {checkAllow}
             selectable = {true}
-            editable= {false}
+            editable= {true}
             dayMaxEvents={true}
             select = {handleDateSelect}
             eventClick={handleEventClick}
@@ -202,11 +197,13 @@ function Scheduler(props) {
                 <Button onClick={()=>{handleSubmit()}}> Continue </Button>
               </Modal.Footer>
             </Modal>
-
+            
 
 
         </div>
 
+
+    </div>
     </div>
     )
 }
