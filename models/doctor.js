@@ -33,6 +33,7 @@ const doctorSchema =  new mongoose.Schema({
     practiceStartDate: {
         type: Date,
         required: true,
+        default: new Date()
     }
 })
 
