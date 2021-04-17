@@ -13,7 +13,13 @@ app.use(express.json());
 
 
 // 1.2 Connect to DB
-mongoose.connect('mongodb+srv://ohsfron_app:12345qwerty@cluster0.qhw2d.mongodb.net/ohs');
+mongoose.connect('mongodb+srv://ohsfron_app:12345qwerty@cluster0.qhw2d.mongodb.net/ohs', function(err) {
+  if (err) {
+      console.err(err);
+  } else {
+      console.log('Connected');
+  }    
+});
 
 const db = mongoose.connection;
 
@@ -38,6 +44,12 @@ app.use("/api/doctors", doctorRoutes);
 const userRoutes = require("./routes/api/users");
 
 app.use("/api/users", userRoutes);
+
+
+//3.3 Import routes for reviews api
+const reviewRoutes = require("./routes/api/reviews");
+
+app.use("/api/reviews", reviewRoutes);
 
 
 // 3. Start server
