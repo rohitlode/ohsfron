@@ -11,7 +11,7 @@ function Contact() {
        <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <input type="text" name="txtName" class="form-control" placeholder="Your Name *" value="" />
+                    <input type="text" name="txtName" class="form-control" placeholder="Your Name" value="" />
                 </div>
                 <div class="form-group">
                     <input type="text" name="txtEmail" class="form-control" placeholder="Your Email *" value="" />
