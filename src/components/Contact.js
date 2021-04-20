@@ -18,7 +18,7 @@ function Contact(props){
           <div className="user-button">
             <div className="row">
               <div className="col-md-6">
-                <button type="button" className="btn btn-primary btn-sm btn-block"><i className="fa fa-envelope"></i> Send Message</button>
+                <button type="button" className="btn btn-primary btn-sm btn-block"><i className="fa fa-envelope"></i> Send a Message</button>
               </div>
               <div className="col-md-6">
                 <button type="button" className="btn btn-default btn-sm btn-block"><i className="fa fa-user"></i> Add as friend</button>
