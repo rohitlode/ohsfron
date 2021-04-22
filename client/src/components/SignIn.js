@@ -1,9 +1,9 @@
 import {useState} from 'react';
-import {Link, useLocation, useHistory, Redirect} from 'react-router-dom'
-function Signin({ loggedState, setloggedState, setdisplayNav}){
+import {Link, useLocation, useHistory} from 'react-router-dom'
+function Signin({ setloggedState, setToken, setdisplayNav}){
 	const [Username, setUsername] = useState("");
 	const [Password, setPassword] = useState("");
-	let location = useLocation();
+	// let location = useLocation();
 	let history = useHistory();
 
 
@@ -21,13 +21,17 @@ function Signin({ loggedState, setloggedState, setdisplayNav}){
 
 	 //Validate credentials
 	 const validate = async (e) => {
-		const token = await loginUser({
+		const reply = await loginUser({
 			Username, Password
 		})
-		if(token){
-			setloggedState(token);
+		console.log("Reply ", reply)
+		if(reply.hasOwnProperty('token')){
+			setToken(reply);
 			setdisplayNav(true);
+			setloggedState(true);
 			history.push("/")
+		}else{
+			console.log("Invalid credentials ", reply.message);
 		}
 		
 	  }

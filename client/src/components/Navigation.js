@@ -1,8 +1,8 @@
 import { Link, NavLink } from "react-router-dom";
 import { useState } from 'react';
 
-function Navigation({loggedState, setdisplayNav, setloggedState, displayNav}){
-  console.log("LOG ",loggedState," ",loggedState!=="");
+function Navigation({token, setdisplayNav, setToken, displayNav, setloggedState}){
+  console.log("LOG ",token," ",token!=="");
   // if(loggedState){
   //   toggledisplaynav();
   // }
@@ -13,7 +13,7 @@ function Navigation({loggedState, setdisplayNav, setloggedState, displayNav}){
       <div className="cover bg-left bg-center-l bg-dark-gray">
       {/* <div className="bg-black-80 pb5 pb6-m pb7-l"> */}
       {
-        loggedState !==  ""?
+        token !==  ""?
         <nav className="dt w-100 mw8 center ">
           <div className="dtc w2 v-mid pa3">
             <NavLink exact to="/" activeClassName="active" className="dib w2 h2 pa1 ba b--black-90 grow-large border-box">
@@ -35,7 +35,7 @@ function Navigation({loggedState, setdisplayNav, setloggedState, displayNav}){
               <NavLink className="f6 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" to="/contact"> Contact Us </NavLink>
               <NavLink className="f6 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" to="/virtualAssistant"> Virtual Assistant </NavLink>
               <NavLink className="f6 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" to="/scheduler"> Scheduler </NavLink>
-              <NavLink className= "f6 fw4 hover-white no-underline white-70 dib ml2 pv2 ph3 ba" onClick={() => {setloggedState("")}} to="/"> Sign Out </NavLink>
+              <NavLink className= "f6 fw4 hover-white no-underline white-70 dib ml2 pv2 ph3 ba" onClick={() => {setToken("")}} to="/"> Sign Out </NavLink>
             </div>
         </nav>
         :
@@ -58,7 +58,7 @@ function Navigation({loggedState, setdisplayNav, setloggedState, displayNav}){
             <div className="dtc v-mid tr pa1 ph3 ">
               <NavLink className="f6 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" to="/doctors"> Doctors </NavLink>
               <NavLink className="f6 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" to="/contact"> Contact Us </NavLink>
-              <NavLink className= "f6 fw4 hover-white no-underline white-70 dib ml2 pv2 ph3 ba"  to="/signin" onClick= {(e)=> setdisplayNav(false)}> Sign In/ Sign Up </NavLink>
+              <NavLink className= "f6 fw4 hover-white no-underline white-70 dib ml2 pv2 ph3 ba"  to="/signin" onClick= {(e)=> setdisplayNav(false), setloggedState(false)}> Sign In/ Sign Up </NavLink>
             </div>
         </nav>
 

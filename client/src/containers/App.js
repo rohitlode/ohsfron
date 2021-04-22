@@ -25,6 +25,7 @@ import {createSession} from "../actions/assistant"
 
 //Import axios
 import axios from "axios";
+import { set } from 'mongoose';
 
 if(localStorage.session){
   delete axios.defaults.headers.common["session_id"];
@@ -41,30 +42,19 @@ function App() {
   const [displayNav, setdisplayNav] = useState(true);
 
   // const [loggedState, setloggedState] = useState(false);
-  const [loggedState, setloggedState] = useState("");
-
- 
-
-  // let loggedState = false;
-  // const setloggedState = (params) => {
-  //   loggedState = params;
-  // }
-
-  // //Event function for SignIn
-  // const onRouteChange = (route) => {
-  //   console.log("Clicked ",route);
-  //   setRoute(route);
-  // }
+  const [loggedState, setloggedState] = useState(false);
+  const [token, setToken] = useState("");
 
   //useEffect
   useEffect(() => {
-    let isMounted = true; 
-    if(!localStorage.session){
+    if(!localStorage.session && loggedState){
           store.dispatch(createSession());
         }else{
-    
+          if(localStorage.session){
+            delete axios.defaults.headers.common["session_id"];
+            localStorage.clear();
+          }
         }
-        return () => { isMounted = false };
   });
 
   //render will be called everytime setState is called!
@@ -73,12 +63,12 @@ function App() {
   return (
      <Provider store={ store }>
        <div className='tc'>
-          <Navigation loggedState={loggedState} setdisplayNav={setdisplayNav} setloggedState={setloggedState}  displayNav={displayNav} />
+          <Navigation token={token} setdisplayNav={setdisplayNav} setToken={setToken}  displayNav={displayNav} setloggedState={setloggedState}/>
        </div>
 
        <Switch>
           <Route  path="/" exact component = {Home} />
-          <Route  path="/signin" render={(props) => <Signin loggedState={loggedState} setloggedState={setloggedState} setdisplayNav={setdisplayNav} {...props}/>} />
+          <Route  path="/signin" render={(props) => <Signin setloggedState = {setloggedState} token={token} setToken={setToken} setdisplayNav={setdisplayNav} {...props}/>} />
           <Route  exact path="/doctors" component = {Doctors}/>
           <Route  path="/virtualAssistant" component = {Vasst}/>
           <Route  path="/contact" component= {Contact}/>
