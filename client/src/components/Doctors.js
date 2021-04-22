@@ -49,7 +49,7 @@ function Doctors() {
                                             <div class="col-lg-3 col-md-3 col-sm-12 p-0">
                                                 <select class="form-control" id="exampleFormControlSelect1" onChange={onSearchChange}>
                                                     <option>Dentist</option>
-                                                    <option>Nutionist</option>
+                                                    <option>Nutrionist</option>
                                                     <option>Cardiologist</option>
                                                     <option>Neurologist</option>
                                                     <option>Physician</option>

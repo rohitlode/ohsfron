@@ -30,7 +30,7 @@ router.get("/session", async (req, res) => {
 
     // If fail
   } catch (err) {
-    res.send("There was an error processing your request.");
+    res.send("There was an error processing your request in session request.");
     console.log(err);
   }
 });

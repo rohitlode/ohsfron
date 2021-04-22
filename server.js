@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const app = express();
 require("dotenv").config();
+const cors = require('cors')
 
 // 1.1 Allow parsing on request bodies
 app.use(express.json());
@@ -32,7 +33,7 @@ const watsonRoutes = require("./routes/api/watson");
 
 // // 2.1 Direct requests to /api/watson to Watson Routes
 app.use("/api/watson", watsonRoutes);
-
+app.use(cors());
 
 //3.1. Import routes for doctors api
 const doctorRoutes = require("./routes/api/doctors");
@@ -51,6 +52,10 @@ const reviewRoutes = require("./routes/api/reviews");
 
 app.use("/api/reviews", reviewRoutes);
 
+
+//3,4 Login Requets
+const loginRoutes = require("./routes/api/login");
+app.use("/api/login", loginRoutes);
 
 // 3. Start server
 const port = process.env.PORT || 5000;

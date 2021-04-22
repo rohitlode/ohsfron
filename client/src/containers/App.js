@@ -1,6 +1,6 @@
 //Import dependencies
 import {useEffect, useState} from 'react';
-import SignIn from '../components/SignIn'
+import Signin from '../components/SignIn'
 import Navigation from '../components/Navigation';
 import Signup from '../components/Signup';
 import Home from '../components/Home';
@@ -37,36 +37,48 @@ function App() {
 
   //States  
 
-  const [route, setRoute] = useState('signin');
+  // const [route, setRoute] = useState('signin');
+  const [displayNav, setdisplayNav] = useState(true);
 
+  // const [loggedState, setloggedState] = useState(false);
+  const [loggedState, setloggedState] = useState("");
 
-  //Event function for SignIn
-  const onRouteChange = (route) => {
-    console.log("Clicked ",route);
-    setRoute(route);
-  }
+ 
+
+  // let loggedState = false;
+  // const setloggedState = (params) => {
+  //   loggedState = params;
+  // }
+
+  // //Event function for SignIn
+  // const onRouteChange = (route) => {
+  //   console.log("Clicked ",route);
+  //   setRoute(route);
+  // }
 
   //useEffect
   useEffect(() => {
+    let isMounted = true; 
     if(!localStorage.session){
           store.dispatch(createSession());
         }else{
     
         }
-  }, []);
+        return () => { isMounted = false };
+  });
 
   //render will be called everytime setState is called!
   // render(){
-
+  console.log("Logged State :",loggedState, "Display Nav ",displayNav)
   return (
      <Provider store={ store }>
        <div className='tc'>
-       <Navigation onRouteChange = {onRouteChange}/>
+          <Navigation loggedState={loggedState} setdisplayNav={setdisplayNav} setloggedState={setloggedState}  displayNav={displayNav} />
        </div>
 
        <Switch>
           <Route  path="/" exact component = {Home} />
-          <Route  path="/signin" component = {SignIn}/>
+          <Route  path="/signin" render={(props) => <Signin loggedState={loggedState} setloggedState={setloggedState} setdisplayNav={setdisplayNav} {...props}/>} />
           <Route  exact path="/doctors" component = {Doctors}/>
           <Route  path="/virtualAssistant" component = {Vasst}/>
           <Route  path="/contact" component= {Contact}/>

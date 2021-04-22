@@ -15,6 +15,7 @@ export const userMessage = (message) => async(dispatch) =>{
 
 //Creates a session - API call (Call to get session ID for assistant, which can be used to communicate with backend)
 export const createSession = () => async(dispatch) => {
+  console.log("Calling action creation session");
   try{
     const res  = await axios.get("/api/watson/session");
     dispatch({type: SESSION_SUCCESS, payload:res.data});
