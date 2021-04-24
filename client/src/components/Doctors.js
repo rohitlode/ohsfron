@@ -2,22 +2,20 @@ import ContactDirectory from '../components/ContactDirectory';
 import SearchBox from '../components/SearchBox';
 import Scroll from '../components/Scroll';
 import {useEffect, useState} from 'react';
-import avatars from '../avatars'
 
 
-function Doctors() {
+function Doctors( { loggedState } ) {
 
-    const [users, setAvatars] = useState([]);
+    const [avatars, setAvatars] = useState([]);
     const [searchField, setSearchField] = useState("");
 
     let filteredNames = [];
     
+
+
     for(let i=0; i < avatars.length; i++){
         // console.log(avatars[i])
-        if(avatars[i].name.toLowerCase().includes(searchField.toLowerCase())){
-            filteredNames.push(avatars[i]);
-        }
-        else if(avatars[i].profession.toLowerCase().includes(searchField.toLowerCase())){
+        if(avatars[i].name.first.toLowerCase().includes(searchField.toLowerCase())){
             filteredNames.push(avatars[i]);
         }
     }
@@ -29,10 +27,10 @@ function Doctors() {
 
     useEffect(() => {
         // console.log("useEffect called....", avatars);
-        // fetch("https://jsonplaceholder.typicode.com/users")
-        // .then(response => response.json())
-        // .then(users => setAvatars(users));
-        setAvatars(avatars)
+        fetch("http://localhost:5000/api/doctors/")
+        .then(response => response.json())
+        .then(doctors => setAvatars(doctors));
+        // setAvatars(avatars)
     }, []);
 
     return (
@@ -73,7 +71,7 @@ function Doctors() {
             </div>
             <div className='container bootstrap snippets bootdey'>
                 <Scroll>
-                    <ContactDirectory avatars={filteredNames}/>
+                    <ContactDirectory avatars={filteredNames} loggedState={loggedState} />
                 </Scroll>
             </div>
             {/*  Experimental */}

@@ -24,28 +24,7 @@ router.get("/:id", getUser, (req, res) => {
 })
 
 
-//Creating one
-router.post("/" , async (req, res) => {
-    const user = new User({
-        name: req.body.name,
-        email: req.body.email,
-        address: req.body.address,
-        registeredDate: req.body.registeredDate
-    })
-    console.log(req);
-    try{
-        const newUser = await user.save(function(err){
-            if(err){
-                 console.log(err);
-                 return;
-            }
-            console.log("user Created Successfully");
-            res.status(201).json(newUser)
-      });
-    }catch(err){
-        res.status(400).json({message: err.message})
-    }
-})
+
 
 
 //Updating one

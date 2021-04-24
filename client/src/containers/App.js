@@ -10,8 +10,11 @@ import Doctors from '../components/Doctors';
 import Article from '../components/Article';
 import Greeting from '../components/Greeting';
 import Appointment from '../components/Appointment';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import NotFound from '../components/NotFound'
 import './main.css';
+import {useHistory} from 'react-router-dom';
+import config from '../config'
 
 //Import Redux components
 import {Provider} from "react-redux";
@@ -25,7 +28,6 @@ import {createSession} from "../actions/assistant"
 
 //Import axios
 import axios from "axios";
-import { set } from 'mongoose';
 
 if(localStorage.session){
   delete axios.defaults.headers.common["session_id"];
@@ -37,46 +39,51 @@ if(localStorage.session){
 function App() {
 
   //States  
-
-  // const [route, setRoute] = useState('signin');
   const [displayNav, setdisplayNav] = useState(true);
-
-  // const [loggedState, setloggedState] = useState(false);
   const [loggedState, setloggedState] = useState(false);
-  const [token, setToken] = useState("");
+
+
+  if(!localStorage.session && loggedState){
+    store.dispatch(createSession());
+  }else{
+    // if(localStorage.session && !loggedState){
+    //   delete axios.defaults.headers.common["session_id"];
+    //   localStorage.clear();
+    // }
+  }
 
   //useEffect
   useEffect(() => {
-    if(!localStorage.session && loggedState){
-          store.dispatch(createSession());
-        }else{
-          if(localStorage.session){
-            delete axios.defaults.headers.common["session_id"];
-            localStorage.clear();
-          }
-        }
+   if(localStorage.token){
+     setloggedState(true);
+   }
   });
 
-  //render will be called everytime setState is called!
-  // render(){
+
   console.log("Logged State :",loggedState, "Display Nav ",displayNav)
   return (
      <Provider store={ store }>
        <div className='tc'>
-          <Navigation token={token} setdisplayNav={setdisplayNav} setToken={setToken}  displayNav={displayNav} setloggedState={setloggedState}/>
+          <Navigation setdisplayNav={setdisplayNav} loggedState={loggedState} displayNav={displayNav} setloggedState={setloggedState}/>
        </div>
 
        <Switch>
-          <Route  path="/" exact component = {Home} />
-          <Route  path="/signin" render={(props) => <Signin setloggedState = {setloggedState} token={token} setToken={setToken} setdisplayNav={setdisplayNav} {...props}/>} />
-          <Route  exact path="/doctors" component = {Doctors}/>
+          <Route  path="/home" exact component = {Home} />
+          <Route  path="/signin" render={(props) => <Signin setloggedState = {setloggedState} setdisplayNav={setdisplayNav} {...props}/>} />
+          <Route  path="/doctors" render={(props) => <Doctors loggedState={ loggedState} {...props}/>}/>
           <Route  path="/virtualAssistant" component = {Vasst}/>
-          <Route  path="/contact" component= {Contact}/>
+          <Route  path="/contact" component ={Contact} />
           <Route  path="/signup" component= {Signup}/>
           <Route  path="/scheduler" component= {Scheduler}/>
           <Route  path="/articles" component= {Article}/>
           <Route  path="/appointments" component={Appointment} />
           <Route  path="/greeting" component={Greeting} />
+          <Route exact path="/">
+            <Redirect to="/home" />
+          </Route>
+          <Route path="*">
+            <NotFound />
+          </Route>
        </Switch>
        <div className="bg-black-80  pa4">
             <h2 className="fw1 tc white-90">One Health System </h2>

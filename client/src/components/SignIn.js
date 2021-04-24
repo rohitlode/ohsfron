@@ -1,8 +1,9 @@
 import {useState} from 'react';
 import {Link, useLocation, useHistory} from 'react-router-dom'
-function Signin({ setloggedState, setToken, setdisplayNav}){
+function Signin({ setloggedState, setdisplayNav}){
 	const [Username, setUsername] = useState("");
 	const [Password, setPassword] = useState("");
+	const [message, setMessage] = useState("");
 	// let location = useLocation();
 	let history = useHistory();
 
@@ -26,12 +27,16 @@ function Signin({ setloggedState, setToken, setdisplayNav}){
 		})
 		console.log("Reply ", reply)
 		if(reply.hasOwnProperty('token')){
-			setToken(reply);
-			setdisplayNav(true);
-			setloggedState(true);
-			history.push("/")
+			setTimeout(() => {
+				history.push("/home")
+				setdisplayNav(true);
+				setloggedState(true);
+				localStorage.setItem("token", reply['token']);
+			  }, 100);
+			
 		}else{
 			console.log("Invalid credentials ", reply.message);
+			setMessage(reply.message);
 		}
 		
 	  }
@@ -39,6 +44,13 @@ function Signin({ setloggedState, setToken, setdisplayNav}){
 
 	return (
 		<div className="vh-100 dt w-100 bg-lightest-blue">
+		{
+			message?
+			<div class="alert alert-danger tc" role="alert">
+				{message}
+			</div>
+			:<div></div>
+		}
 		<div class=" pa5 modal-dialog modal-login">
 			<div class="modal-content">
 				<div class="modal-header">

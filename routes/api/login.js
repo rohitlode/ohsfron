@@ -2,25 +2,29 @@
 const express =  require('express')
 const bcrypt = require('bcrypt')
 const router = express.Router()
-
+const bodyParser = require('body-parser');
 const User = require('../../models/user')
+const jwt = require('jsonwebtoken');
 
 
 router.post("/", async (req, res) => { 
     User.findOne({email: req.body.Username }).then(
         (user) => {
             if(!user){
-                return res.status(401).json({message: "User not found"});
+                return res.status(401).json({message: "Invalid Username/ Username not found"});
             }
             console.log("Username ", req.body.Username," ",req.body.Password," ",user.password)
             if(req.body.Password === user.password){
-                return res.status(200).json({ token: "token" })
+                console.log("password crct")
+                const accessToken = jwt.sign({username: user.email}, process.env.ACCESS_TOKEN);
+                console.log("Token :",accessToken)
+                return res.status(200).json({ token: accessToken })
             }else{
-                return res.status(401).json({message: "Password is not correct"});
+                return res.status(401).json({message: "Incorrect Password"});
             }
         }
     ).catch((error)=>{
-        res.status(500).json({error: "Username/Password entered is incorrect"})
+        res.status(500).json({error: new Error(error)})
     })
 });
 

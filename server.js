@@ -10,6 +10,8 @@ const cors = require('cors')
 
 // 1.1 Allow parsing on request bodies
 app.use(express.json());
+app.use(bodyParser.json());
+
 
 
 
@@ -56,6 +58,10 @@ app.use("/api/reviews", reviewRoutes);
 //3,4 Login Requets
 const loginRoutes = require("./routes/api/login");
 app.use("/api/login", loginRoutes);
+
+//3,5 Register Requets
+const registerRoutes = require("./routes/api/register");
+app.use("/api/register", registerRoutes);
 
 // 3. Start server
 const port = process.env.PORT || 5000;

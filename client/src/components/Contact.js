@@ -4,6 +4,7 @@ import 'font-awesome/css/font-awesome.min.css';
 import {Link} from 'react-router-dom';
 
 function Contact(props){
+  console.log("Logged state in contact ",props.loggedState)
   return (
     <div className="col-sm-4 mh-25">
       <div className="box-info text-center user-profile-2">
@@ -19,7 +20,22 @@ function Contact(props){
           <div className="user-button">
             <div className="row">
               <div className="col-md">
-                <Link to={{pathname: "/scheduler", aboutProps: {name: `${props.name}`, timings:{'start': 6, 'end': 10}}}} type="button" className="btn btn-primary btn-sm btn-block"><i className="fa fa-envelope"></i> Book Appointment</Link>
+                {
+                  props.loggedState == true?
+                  <Link 
+                    to={    {pathname: "/scheduler", 
+                            aboutProps: {name: `${props.name}`, 
+                            availability: `${props.availability}` , 
+                            timings:{'start': `${props.startTime}`,
+                            'end': `${props.endTime}`}}}}
+                    type="button" 
+                    className="btn btn-primary btn-sm btn-block">
+                    <i className="fa fa-envelope">
+                    </i> Book Appointment
+                  </Link>
+                  :
+                  <div></div>
+                }
               </div>
             </div>
           </div>

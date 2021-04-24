@@ -37,6 +37,15 @@ function Scheduler(props) {
           </li>
         )
       }
+
+      const AMPM = (time) => {
+        if(time < 12){
+          return "AM"
+        }else{
+          return "PM"
+        }
+      }
+
       const renderSidebar = () => {
         return (
           <div className="">
@@ -47,7 +56,8 @@ function Scheduler(props) {
               <div>
                 <h2>Schedule an Appointment</h2>
                 <p>Doctor Name: Dr. {props.location.aboutProps.name}</p>
-                <p>Available from {props.location.aboutProps.timings.start} to {props.location.aboutProps.timings.end + 1}</p>
+                <p>Days Available: {props.location.aboutProps.availability}</p>
+                <p>Timings:  {props.location.aboutProps.timings.start +" "+ AMPM(props.location.aboutProps.timings.start ) } to {props.location.aboutProps.timings.end-12+" "+ AMPM(props.location.aboutProps.timings.end ) }</p>
               </div>
               :<div> <h2>Instruction</h2></div>}
               <ul>
@@ -79,6 +89,14 @@ function Scheduler(props) {
       const createEventId = () => {
         return String(eventGuid++)
       }
+
+      const dayMapping = (day) =>{
+        const days = {'sunday': 0, 'monday': 1, 'tuesday': 2, 'wednesday':3, 'thursday':4, 'friday':5, 'saturday':6};
+        if(day.toLowerCase() in days){
+          return days[day.toLowerCase()];
+        }
+      }
+
 
       const handleDateSelect = (selectInfo) => {
         console.log(selectInfo)
@@ -113,15 +131,22 @@ function Scheduler(props) {
         setCurrentEvents(events);
       }
 
-      const checkAllow = (selectInfo) => {
+      const checkAllow = (selectInfo) => {  
+        var st = selectInfo.start;
         var startDate = new Date(selectInfo.startStr);
+        var sday = startDate.getDay();
         var sminutes = startDate.getMinutes();
         var shours = startDate.getHours();
         var endDate = new Date(selectInfo.endStr);
         var eminutes = endDate.getMinutes();
         var ehours = endDate.getHours();
-        console.log("Minutes :",sminutes, "start hours :",shours)
-        console.log("Minutes :",eminutes, "end hours :",ehours)
+        let availDays = prop.props.location.aboutProps.availability.split(',');
+        availDays.forEach((day) => {
+          if(dayMapping(day) != sday){
+            return false;
+          }
+        });
+        console.log(availDays);
         if(shours >= prop.props.location.aboutProps.timings.start && ehours<= prop.props.location.aboutProps.timings.end
            && currentEvents.length <= 0 && ehours-shours<=1){
           return true
@@ -162,11 +187,11 @@ function Scheduler(props) {
                 right: 'title'
               }}
             initialView='timeGridWeek'
-            // disableDragging={true}
+            disableDragging={true}
             selectable={true}
             selectAllow = {checkAllow}
             selectable = {true}
-            editable= {true}
+            // editable= {true}
             dayMaxEvents={true}
             select = {handleDateSelect}
             eventClick={handleEventClick}
