@@ -32,6 +32,7 @@ function Signin({ setloggedState, setdisplayNav}){
 				setdisplayNav(true);
 				setloggedState(true);
 				localStorage.setItem("token", reply['token']);
+				localStorage.setItem("id", reply["userid"]);
 			  }, 100);
 			
 		}else{

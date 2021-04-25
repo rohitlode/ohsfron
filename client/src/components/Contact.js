@@ -27,7 +27,9 @@ function Contact(props){
                             aboutProps: {name: `${props.name}`, 
                             availability: `${props.availability}` , 
                             timings:{'start': `${props.startTime}`,
-                            'end': `${props.endTime}`}}}}
+                            'end': `${props.endTime}`},
+                            did: `${props.did}`
+                          }}}
                     type="button" 
                     className="btn btn-primary btn-sm btn-block">
                     <i className="fa fa-envelope">

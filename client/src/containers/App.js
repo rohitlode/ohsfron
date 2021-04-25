@@ -28,6 +28,7 @@ import {createSession} from "../actions/assistant"
 
 //Import axios
 import axios from "axios";
+import UpdateInformation from '../components/UpdateInformation';
 
 if(localStorage.session){
   delete axios.defaults.headers.common["session_id"];
@@ -74,10 +75,11 @@ function App() {
           <Route  path="/virtualAssistant" component = {Vasst}/>
           <Route  path="/contact" component ={Contact} />
           <Route  path="/signup" component= {Signup}/>
-          <Route  path="/scheduler" component= {Scheduler}/>
+          <Route  path="/scheduler" render={(props) => <Scheduler loggedState={ loggedState} {...props}/> } />
           <Route  path="/articles" component= {Article}/>
           <Route  path="/appointments" component={Appointment} />
           <Route  path="/greeting" component={Greeting} />
+          <Route  path="/account" render={(props) => <UpdateInformation loggedState={ loggedState} /> }   />
           <Route exact path="/">
             <Redirect to="/home" />
           </Route>

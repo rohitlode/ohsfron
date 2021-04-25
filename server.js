@@ -55,13 +55,18 @@ const reviewRoutes = require("./routes/api/reviews");
 app.use("/api/reviews", reviewRoutes);
 
 
-//3,4 Login Requets
+//3.4 Login Requets
 const loginRoutes = require("./routes/api/login");
 app.use("/api/login", loginRoutes);
 
-//3,5 Register Requets
+//3.5 Register Requets
 const registerRoutes = require("./routes/api/register");
 app.use("/api/register", registerRoutes);
+
+
+//3.6 Appointment Requets
+const appointmentRoutes = require("./routes/api/appointments");
+app.use("/api/appointments", appointmentRoutes);
 
 // 3. Start server
 const port = process.env.PORT || 5000;

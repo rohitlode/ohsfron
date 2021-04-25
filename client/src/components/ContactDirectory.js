@@ -8,7 +8,7 @@ function ContactDirectory({avatars, loggedState}){
         return (
         <Contact
           key ={i}
-          id={avatars[i]._id}
+          did={avatars[i]._id}
           name={avatars[i].name.first + " " + avatars[i].name.last}
           email={avatars[i].email}
           profession={avatars[i].profession}

@@ -40,10 +40,9 @@ function Navigation({setdisplayNav, loggedState, displayNav, setloggedState}){
             </NavLink>
           </div>
             <div className="dtc v-mid tr pa1 ph3 ">
-              <NavLink className="f6 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" to="/doctors"> Doctors </NavLink>
-              <NavLink className="f6 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" to="/contact"> Contact Us </NavLink>
-              <NavLink className="f6 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" to="/virtualAssistant"> Virtual Assistant </NavLink>
               <NavLink className="f6 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" to="/scheduler"> Scheduler </NavLink>
+              <NavLink className="f6 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" to="/account"> My Account </NavLink>
+              <NavLink className="f6 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" to="/contact"> Contact Us </NavLink>
               <NavLink className= "f6 fw4 hover-white no-underline white-70 dib ml2 pv2 ph3 ba" onClick={() => {logout()}} to="/"> Sign Out </NavLink>
             </div>
         </nav>

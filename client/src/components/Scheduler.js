@@ -1,5 +1,5 @@
 import FullCalendar, {formatDate} from '@fullcalendar/react'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from "@fullcalendar/interaction"; // needed for dayClick
@@ -7,8 +7,9 @@ import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import {Link} from 'react-router-dom'
+import config from '../config'
 
-function Scheduler(props) {
+function Scheduler(props, loggedState) {
 
 
     const [prop, setProp] = useState({props});
@@ -16,6 +17,35 @@ function Scheduler(props) {
     const [modalShow, setModalShow] = useState(false);
     const [email, setEmail] = useState("");
     const [mobile, setMobile] = useState("");
+
+
+    async function getAppointments(){
+      return fetch(`${config.baseUrl}/appointments`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "token": localStorage.getItem('token')
+        },
+      }).then((res) => {
+        return res.json(); 
+    })
+    }
+
+
+    const loadAppointments = async () => {
+      const appointments = await getAppointments();
+      console.log("User :", appointments);
+      setCurrentEvents(appointments);
+    }
+
+
+    useEffect(() => {
+      if(loggedState)
+        loadAppointments();
+    }, [])
+
+
+
     // const dates = { 'a': {'start': 6, 'end': 10}, 'b':{'start': 16, 'end': 21}}
     console.log(prop);
     if(prop.props.location.hasOwnProperty("aboutProps") && prop.props.location.aboutProps.hasOwnProperty("name")){
@@ -31,7 +61,7 @@ function Scheduler(props) {
 
       const renderSidebarEvent = (event) => {
         return (
-          <li key={event.id}>
+          <li key={event._id}>
             <b>{formatDate(event.start, {year: 'numeric', month: 'short', day: 'numeric'})}</b>
             <i>{event.title}</i>
           </li>
@@ -57,7 +87,7 @@ function Scheduler(props) {
                 <h2>Schedule an Appointment</h2>
                 <p>Doctor Name: Dr. {props.location.aboutProps.name}</p>
                 <p>Days Available: {props.location.aboutProps.availability}</p>
-                <p>Timings:  {props.location.aboutProps.timings.start +" "+ AMPM(props.location.aboutProps.timings.start ) } to {props.location.aboutProps.timings.end-12+" "+ AMPM(props.location.aboutProps.timings.end ) }</p>
+                <p>Timings:  { (props.location.aboutProps.timings.start>12? props.location.aboutProps.timings.start-12 : props.location.aboutProps.timings.start) +" "+ AMPM(props.location.aboutProps.timings.start ) } to {props.location.aboutProps.timings.end-12+" "+ AMPM(props.location.aboutProps.timings.end ) }</p>
               </div>
               :<div> <h2>Instruction</h2></div>}
               <ul>
@@ -127,7 +157,40 @@ function Scheduler(props) {
         }
       }
 
+      async function postEvent ( event ){
+        return fetch(`${config.baseUrl}/appointments`, {
+          method: 'POST',
+          headers: {
+          'Content-Type': 'application/json',
+          "token": localStorage.getItem('token')
+          },
+          body: JSON.stringify(event)
+        })
+          .then(data => data.json())
+         }
+
+
+
+      const addEvent = async (events, did) => {
+        for(const evt of events){
+          console.log("Event: " ,evt);
+          const reply = await postEvent({d_id: did, start: evt.start, title: evt.title, end: evt.end });
+          if(reply.hasOwnProperty('error')){
+            console.log("Error :", reply.error);
+          }else{
+            console.log("Error :", reply.message);
+          }
+        }
+
+      }
+
       const handleEvents = (events) => {
+        let did = 0;
+        if (props.location.hasOwnProperty("aboutProps") && props.location.aboutProps.hasOwnProperty("did")){
+          did = props.location.aboutProps.did;
+        }
+        if(did != 0)
+        {addEvent(events, did);}
         setCurrentEvents(events);
       }
 
@@ -176,7 +239,7 @@ function Scheduler(props) {
       }
       
     return (
-      <div className="w-100 vh-100">
+      <div className="w-100 h-100">
     <div className='scheduler'>
             {renderSidebar()}
         <div className="scheduler-main">         
@@ -196,6 +259,7 @@ function Scheduler(props) {
             select = {handleDateSelect}
             eventClick={handleEventClick}
             eventsSet={handleEvents}
+            initialEvents={currentEvents}
             />
 
             <Modal show={modalShow}>

@@ -16,9 +16,9 @@ router.post("/", async (req, res) => {
             console.log("Username ", req.body.Username," ",req.body.Password," ",user.password)
             if(req.body.Password === user.password){
                 console.log("password crct")
-                const accessToken = jwt.sign({username: user.email}, process.env.ACCESS_TOKEN);
+                const accessToken = jwt.sign({userid: user._id}, process.env.ACCESS_TOKEN);
                 console.log("Token :",accessToken)
-                return res.status(200).json({ token: accessToken })
+                return res.status(200).json({ token: accessToken, userid: user._id })
             }else{
                 return res.status(401).json({message: "Incorrect Password"});
             }
