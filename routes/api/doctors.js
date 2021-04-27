@@ -10,7 +10,7 @@ router.get("/", async (req, res) => {
     try
     { 
        const doctors = await Doctor.find({});
-       res.json(doctors)
+       res.status(200).json(doctors)
     }catch(err){
         console.log(err);
         res.status(500).json({message: err.message});
@@ -20,7 +20,7 @@ router.get("/", async (req, res) => {
 
 //Getting one
 router.get("/:id", getDoctor, (req, res) => {
-    res.send(res.doctor);
+    res.status(200).send(res.doctor);
 })
 
 
@@ -75,7 +75,7 @@ router.patch("/:id", getDoctor, async(req, res) => {
     try{
         const updatedDoctor =  await res.doctor.save()
         console.log("Updated Doctor Successfully");
-        res.json(updatedDoctor)
+        res.status(200).json(updatedDoctor)
     }catch(err){
         res.status(400).json({ message: err.message })
     }
@@ -85,7 +85,7 @@ router.patch("/:id", getDoctor, async(req, res) => {
 router.delete("/:id", getDoctor, async (req, res) => {
     try{
         await res.doctor.remove()
-        res.json({message: 'Deleted Doctor'})
+        res.send(200).json({message: 'Deleted Doctor'})
     }catch(err){
         return res.status(500).json({message: err.message})
     }

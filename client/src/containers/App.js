@@ -55,6 +55,7 @@ function App() {
 
   //useEffect
   useEffect(() => {
+    document.title="One Health System"
    if(localStorage.token){
      setloggedState(true);
    }

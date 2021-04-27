@@ -259,7 +259,6 @@ function Scheduler(props, loggedState) {
             select = {handleDateSelect}
             eventClick={handleEventClick}
             eventsSet={handleEvents}
-            initialEvents={currentEvents}
             />
 
             <Modal show={modalShow}>
