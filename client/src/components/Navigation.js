@@ -7,7 +7,7 @@ function Navigation({setdisplayNav, loggedState, displayNav, setloggedState}){
 
   const logout = () => {
     /* eslint-disable */
-    const toLogout = confirm("Are you sure to logout ?");
+    const toLogout = confirm("Are you sure you want to logout ?");
     /* eslint-enable */
     if (toLogout) {
       localStorage.clear();
