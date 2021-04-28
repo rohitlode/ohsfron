@@ -7,17 +7,17 @@ const User = require('../../models/user');
 
 
 // //Gettig all
-// router.get("/", async (req, res) => {
-//     try
-//     { 
-//        const users = await User.find();
-//        res.json(users)
-//     }catch(err){
-//         console.log(err);
-//         res.status(500).json({message: err.message});
-//     }
+router.get("/all", async (req, res) => {
+    try
+    { 
+       const users = await User.find();
+       res.json(users)
+    }catch(err){
+        console.log(err);
+        res.status(500).json({message: err.message});
+    }
 
-// })
+})
 
 //Getting one
 router.get("/", getAccesstokenUser, (req, res) => {

@@ -19,7 +19,7 @@ describe('Doctors API ', () => {
             .end((error, response) => {
                 response.should.have.status(200);
                 response.body.should.be.a('array');
-                response.body.length.should.be.eq(18);
+                response.body.length.should.be.eq(15);
             done();
             })
         })
@@ -27,7 +27,7 @@ describe('Doctors API ', () => {
 
 //
 
-// TEST GET DOCTOR BY ID
+// // TEST GET DOCTOR BY ID
 
 describe("GET /api/doctors/:id", () => {
     it("It should get doctor by doctor ID ", (done) => {
@@ -65,26 +65,6 @@ describe("GET /api/doctors/:id", () => {
 });
 
 
-//TEST POST ROUTES
-
-describe("POST /api/doctors", () => {
-    it("It should add a doctor to the database", (done) => {
-        const doctor = {
-                "name": {"first": "Kamine", "last": "DDD"},
-                "email": "paulduminy@gmail.com"
-        };
-        chai.request(server)
-        .post("/api/doctors")
-        .send(doctor)
-        .end((error, response) => {
-            response.should.have.status(201);
-            response.should.be.a('object')
-        done();
-        }) //CHAI END
-    })//IT END
-}); //DESCRIBE END
-
-
 
 //TEST PATCH ROUTES
 describe("PATCH /api/doctors/:id", () => {
@@ -105,22 +85,6 @@ describe("PATCH /api/doctors/:id", () => {
 
 });
 
-
-
-
-//TEST DELETE ROUTES
-describe("DELETE /api/doctors/:id", () => {
-    it("It should get doctor by doctor ID ", (done) => {
-        const did = "608893a45ce60673a45118fb"
-        chai.request(server)
-        .delete("/api/doctors/"+did)
-        .end((error, response) => {
-            response.should.have.status(200);
-        done();
-        })
-    });
-
-});
 
 
 

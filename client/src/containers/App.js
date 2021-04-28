@@ -70,7 +70,7 @@ function App() {
        </div>
 
        <Switch>
-          <Route  path="/home" exact component = {Home} />
+          <Route  path="/home" exact render={(props) => <Home loggedState={loggedState} {...props} />} />
           <Route  path="/signin" render={(props) => <Signin setloggedState = {setloggedState} setdisplayNav={setdisplayNav} {...props}/>} />
           <Route  path="/doctors" render={(props) => <Doctors loggedState={ loggedState} {...props}/>}/>
           <Route  path="/virtualAssistant" component = {Vasst}/>

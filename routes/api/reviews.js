@@ -54,51 +54,6 @@ router.post("/:uid", async (req, res) => {
 })
 
 
-//Updating one
-router.patch("/:id", getReview, async(req, res) => {
-    if(req.body.name != null){
-        res.review.name = req.body.name
-    }
-    if(req.body.address != null){
-        res.review.address = req.body.address
-    }
-    if(req.body.qualifications != null){
-        res.review.qualifications = req.body.qualifications
-    }
-    if(req.body.specialities != null){
-        res.review.specialities = req.body.specialities
-    }
-    if(req.body.mobile != null){
-        res.review.mobile = req.body.mobile
-    }
-    if(req.body.email != null){
-        res.review.email = req.body.email
-    }
-    if(req.body.practiceStartDate != null){
-        res.review.practiceStartDate = req.body.practiceStartDate
-    }
-
-    try{
-        const updatedreview =  await res.review.save()
-        console.log("Updated review Successfully");
-        res.json(updatedReview)
-    }catch(err){
-        res.status(400).json({ message: err.message })
-    }
-})
-
-//Deleting one
-router.delete("/:id", getReview, async (req, res) => {
-    try{
-        await res.review.remove()
-        res.json({message: 'Deleted review'})
-    }catch(err){
-        return res.status(500).json({message: err.message})
-    }
-})
-
-
-
 async function getReview(req, res, next){
     let review;
     try{

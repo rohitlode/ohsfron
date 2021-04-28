@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
+import Scroll from '../Scroll';
 
 //Impot actions
 import { userMessage, sendMessage }  from "../../actions/assistant";
@@ -7,13 +8,18 @@ import { userMessage, sendMessage }  from "../../actions/assistant";
 const Vasst = ({ chat, userMessage, sendMessage }) =>{
 //Handles user message
   const [message, setMessage] = useState("");
+  const [clear, setClear] = useState(false);
   const endOfMessages = useRef(null);
+  const historyContainer = useRef();
 
 
   const scrollToBottom = () => {
     endOfMessages.current.scrollIntoView({ behavior: "smooth" });
   };
-  useEffect(scrollToBottom, [chat]);
+
+  useEffect(() => {
+    // scrollToBottom()
+  }, [chat]);
 
 
   //Handle user's submission
@@ -29,23 +35,28 @@ const Vasst = ({ chat, userMessage, sendMessage }) =>{
   }
 
   return(
-    <div className="">
-    <div className = "tc vh-100">
-      <h1> Virtual Assistant </h1>
-      <p> Type in symptoms to start </p>
-      <div className="historyContainer">
-        {/* Handle Messages */}
-        {chat.length ===0 ? "" : chat.map(msg =>{  return <div className= {msg.type} > {msg.message} </div> }) }
-        <div ref={endOfMessages}></div>
-        {/* Handle Messages */}
+    <div className="container contact-form vh-100 dt w-100 pa5">
+      <div className="tc">
+        <h1> Virtual Assistant </h1>
+        <p> Type in MENTAL/ DENTAL/ HEART to start </p>
+        </div>
+        <div className = "tc  ba bw1" style={{overflow: 'scroll'}}>
+        {/* <button onClick={(e)=>clearDivs()}>clear</button> */}
+        <div id='hc' className="historyContainer" >
+          {/* Handle Messages */}
+          {chat.length ===0 ? "" : chat.map(msg =>{  return <div  className= {msg.type} > {msg.message} </div> }) }
+          {/* <div ref={endOfMessages}></div> */}
+          {/* Handle Messages */}
+        </div>
+          <input
+            id="chatBox"
+            className="chatBox"
+            onChange = {(e)=> setMessage(e.target.value)}
+            onKeyPress={handleClick}
+            placeholder="Please type in symptoms and press enter"
+            value={message}></input>
+            
       </div>
-        <input
-          id="chatBox"
-          className="chatBox"
-          onChange = {(e)=> setMessage(e.target.value)}
-          onKeyPress={handleClick}
-          value={message}></input>
-    </div>
     </div>
   );
 };

@@ -1,9 +1,19 @@
 import Carousel from 'react-bootstrap/Carousel'
-import { Link } from 'react-router-dom'
+import { Link, useHistory} from 'react-router-dom';
+
+function Home( { loggedState } ) {
+    let history = useHistory();
+    const checkLoggedState = () => {
+        if(loggedState){
+            history.push("/virtualAssistant")
+        }else{
+            history.push("/signin")
+        }
+    }
 
 
-function Home() {
-    
+
+
 return (
     
 <header className="sans-serif">
@@ -19,18 +29,9 @@ return (
                 <h2 className="fw1 f3 white-80 mt3 mb4">
                 Get everything taken care of with our Virtual Assistant
                 </h2>
-                <Link to="virtualAssistant" className="f6 no-underline grow dib v-mid bg-blue white ba b--blue ph3 pv2 mb3">
+                <button to="virtualAssistant" onClick = {() => checkLoggedState()} className="f6 no-underline grow dib v-mid bg-blue white ba b--blue ph3 pv2 mb3">
                 Virtual Assistant
-                </Link>
-                <span className="dib v-mid ph3 white-70 mb3">
-                or
-                </span>
-                <Link
-                className="f6 no-underline grow dib v-mid white ba b--white ph3 pv2 mb3"
-                href=""
-                >
-                Check Medi +
-                </Link>
+                </button>
             </div>
         </div>
     </div>
@@ -88,7 +89,7 @@ return (
                     <div className="col-6 col-sm-6">
                         <Link to={{pathname:"https://www.pacificmedicalcenters.org/physician-articles/a-sniffle-a-sneeze-dimple-sahay"}} target="_blank" className="dim black" style={{textDecoration: 'none', color: 'inherit'}} >
                         <div className="card h-100">
-                            <img src="https://www.pacificmedicalcenters.org/images/uploads/flu_and_cold_season.jpg" className="card-img-top" height="173" alt="Physician"/>
+                            <img src="https://www.pacificmedicalcenters.org/wp-content/uploads/2020/06/flu_and_cold_season-300x200.jpg" className="card-img-top" height="173" alt="Physician"/>
                             <div className="card-body">
                                 <h5 className="card-title">A sniffle, a sneeze</h5>
                                 <p className="card-text fw1">PacMed doctor explains the differences between the common cold and flu virus</p>
@@ -101,7 +102,7 @@ return (
                     <div className="col-6 col-sm-6">
                     <Link to={{pathname:"https://www.seattletimes.com/life/wellness/controlling-allergies-in-spring-and-early-summer/#:~:text=Avoid%20using%20fans%20that%20blow,pull%20in%20pollen%20from%20outside.&text=When%20driving%2C%20use%20your%20air,to%20filter%20larger%20sized%20allergens.&text=Use%20a%20dehumidifier%20to%20decrease%20mold%20growth%20in%20your%20home.&text=Shower%20frequently%20to%20remove%20pollen%20from%20your%20skin%20and%20hair."}} target="_blank" className="dim black" style={{textDecoration: 'none', color: 'inherit'}} >
                         <div className="card h-100">
-                            <img src="https://www.pacificmedicalcenters.org/images/uploads/SpringAllergyArticle.jpg" className="card-img-top" height="173" alt="Physician"/>
+                            <img src="https://static.seattletimes.com/wp-content/uploads/2015/05/6ab2a202-f82d-11e4-82f6-7e9d5b28ed541-2040x2308.jpg" className="card-img-top" height="173" alt="Physician"/>
                             <div className="card-body">
                                 <h5 className="card-title">Controlling Allergies in Spring and Early Summer</h5>
                                 <p className="card-text fw1">Springtime brings sunshine, green grass, chirping birds, blooming bulbs and if...</p>

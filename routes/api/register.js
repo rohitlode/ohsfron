@@ -7,20 +7,21 @@ const User = require('../../models/user')
 
 //Creating one
 router.post("/" , async (req, res) => {
-    console.log("REq data :", req)
+    // console.log("REq data :", req)
     const user = new User({
         name: {first: req.body.first, last: req.body.last},
         email: req.body.email,
         address: req.body.address,
         password: req.body.password
     })
-    console.log(req);
+    // console.log(req);
     try{
-        const checkExists = User.findOne({email: req.body.email});
+        const checkExists = (await User.findOne({email: req.body.email}))
+        console.log("checkExists :",checkExists)
         if(checkExists == null){
                 const newUser = await user.save(function(err){
                     if(err){
-                        console.log(err);
+                        console.log("Error in adding ",err);
                         return;
                     }
                     console.log("User created successfully");
