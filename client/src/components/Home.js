@@ -1,8 +1,14 @@
 import Carousel from 'react-bootstrap/Carousel'
+import {useEffect, useState} from 'react'
 import { Link, useHistory} from 'react-router-dom';
+import config from '../config'
 
 function Home( { loggedState } ) {
-    let history = useHistory();
+    let history = useHistory({});
+
+    const [reviews, setReviews] = useState([])
+
+
     const checkLoggedState = () => {
         if(loggedState){
             history.push("/virtualAssistant")
@@ -11,7 +17,29 @@ function Home( { loggedState } ) {
         }
     }
 
+    async function getReviews(){
+        return fetch(`${config.baseUrl}/reviews`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }).then((res) => {
+          return res.json(); 
+      })
+      }
 
+      const loadReviews = async () => {
+        const reviews = await getReviews();
+        console.log("reviews :", reviews);
+        setReviews(reviews);
+      }
+
+
+      
+
+      useEffect(() => {
+        loadReviews();
+      }, [])
 
 
 return (
@@ -152,10 +180,23 @@ return (
     
     {/* REVIEWS */}
         {/* <ControlledCarousel /> */}
-        <div className="pa6">
-            <h2 className="tc fw4 ">What our users have to say</h2>
-            <Carousel className="pa2 bg-white"> 
-                <Carousel.Item className="pa5 bg-white">
+        <div className="pa6 bg-gray">
+            <h2 className="tc fw4 white-80">What our users have to say</h2>
+            <Carousel className="pa2 bg-gray"> 
+            {
+                reviews.length>0? reviews.map(review => {  
+                    return( 
+                    <Carousel.Item className="pa5 bg-gray">
+                    <Carousel.Caption className="pa1">
+                    <h3 className="white-80 fw2">{ review.review }</h3>
+                    <p className="white-80"> {review.user_id} </p>
+                    {/* <p className="black-80">Nulla vitae elit libero, a pharetra augue mollis interdum.</p> */}
+                    </Carousel.Caption>
+                </Carousel.Item>);
+                }) : ""
+            }
+            </Carousel>
+              {/* /*  <Carousel.Item className="pa5 bg-white">
                     <Carousel.Caption className="pa1">
                     <h3 className="black-80 fw2">Really very great application</h3>
                     <p className="black-80">Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
@@ -172,8 +213,8 @@ return (
                     <h3 className="black-80 fw2">I get to learn a lot from this website!</h3>
                     <p className="black-80">Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
                     </Carousel.Caption>
-                </Carousel.Item>
-            </Carousel>
+                </Carousel.Item> */ }
+            
         </div>
 
         

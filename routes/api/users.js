@@ -24,6 +24,11 @@ router.get("/", getAccesstokenUser, (req, res) => {
     res.send(res.user);
 })
 
+//Getting name
+router.get("/:id", getUser, (req, res) => {
+    res.send(res.user);
+})
+
 
 
 

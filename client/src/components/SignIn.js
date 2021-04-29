@@ -77,7 +77,7 @@ function Signin({ setloggedState, setdisplayNav}){
 						Don't have an account?<Link to="/signup">Sign Up</Link>
 					</div>
 			<div className="">
-					  <a href="#">Forgot Password?</a>
+					  <Link to="/forgotPassword">Forgot Password?</Link>
 			</div>
 				</div>
 			</div>
