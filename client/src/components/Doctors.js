@@ -12,10 +12,10 @@ function Doctors( { loggedState } ) {
     let filteredNames = [];
     
 
-
+    console.log(avatars)
     for(let i=0; i < avatars.length; i++){
         // console.log(avatars[i])
-        if(avatars[i].name.first.toLowerCase().includes(searchField.toLowerCase())){
+        if(avatars[i].profession.toLowerCase().includes(searchField.toLowerCase())){
             filteredNames.push(avatars[i]);
         }
     }
@@ -46,11 +46,17 @@ function Doctors( { loggedState } ) {
                                         <div class="row no-gutters">
                                             <div class="col-lg-3 col-md-3 col-sm-12 p-0">
                                                 <select class="form-control" id="exampleFormControlSelect1" onChange={onSearchChange}>
-                                                    <option>Dentist</option>
+                                                   
+                                                   {
+                                                       avatars.map(avatar => {
+                                                           return <option> {avatar.profession}</option>
+                                                       })
+                                                   }
+                                                    {/* <option>Dentist</option>
                                                     <option>Nutrionist</option>
                                                     <option>Cardiologist</option>
                                                     <option>Neurologist</option>
-                                                    <option>Physician</option>
+                                                    <option>Physician</option> */}
                                                 </select>
                                             </div>
                                             <div class="col-lg-8 col-md-6 col-sm-12 p-0">

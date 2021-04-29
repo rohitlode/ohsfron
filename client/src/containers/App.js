@@ -29,6 +29,9 @@ import {createSession} from "../actions/assistant"
 //Import axios
 import axios from "axios";
 import UpdateInformation from '../components/UpdateInformation';
+import Review from '../components/Review';
+import ForgotPassword from '../components/ForgotPassword';
+import ResetPassword from '../components/ResetPassword';
 
 if(localStorage.session){
   delete axios.defaults.headers.common["session_id"];
@@ -80,6 +83,9 @@ function App() {
           <Route  path="/articles" component= {Article}/>
           <Route  path="/appointments" component={Appointment} />
           <Route  path="/greeting" component={Greeting} />
+          <Route  path="/review" component={Review} />
+          <Route  path="/forgotPassword" component={ForgotPassword} />
+          <Route exact path="/reset/:token" component={ResetPassword} />
           <Route  path="/account" render={(props) => <UpdateInformation loggedState={ loggedState} /> }   />
           <Route exact path="/">
             <Redirect to="/home" />

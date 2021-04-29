@@ -36,7 +36,8 @@ router.post("/:uid", async (req, res) => {
     }
     const review = new Review({
         "review": req.body.review,
-        "user_id": req.params.uid
+        "user_id": userId.name.first+" "+userId.name.last,
+        "rating": req.body.value
     })
     console.log(req);
     try{
@@ -46,10 +47,10 @@ router.post("/:uid", async (req, res) => {
                  return;
             }
             console.log("review Created Successfully");
-            res.status(201).json(newReview)
+            res.status(201).json({review: newReview, message:"Review posted successfully"})
       });
     }catch(err){
-        res.status(400).json({message: err.message})
+        res.status(400).json({error: err.message})
     }
 })
 

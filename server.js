@@ -68,6 +68,22 @@ app.use("/api/register", registerRoutes);
 const appointmentRoutes = require("./routes/api/appointments");
 app.use("/api/appointments", appointmentRoutes);
 
+
+//3.7 ForgotPassword Requests
+const fp = require("./routes/api/forgotPassword");
+app.use("/api/forgotPassword", fp);
+
+//3.7 resetPassword Requests
+const rp = require("./routes/api/resetPassword");
+app.use("/api/resetPassword", rp);
+
+//3.7 updatePasswordViaEmail Requests
+const up = require("./routes/api/updatePasswordViaEmail");
+app.use("/api/updatePasswordViaEmail", up);
+
+
+
+
 // 3. Start server
 const port = process.env.PORT || 5000;
 const server = app.listen(port, () => {
